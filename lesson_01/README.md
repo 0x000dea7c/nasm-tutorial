@@ -1,0 +1,3 @@
+# Exercise
+
+Print a message.
