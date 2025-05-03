@@ -1,30 +1,30 @@
-        ;;
-        ;; arguments:
-        ;;
-        ;; string message (eax)
-        ;;
+;;
+;; arguments:
+;;
+;; string message (eax)
+;;
 string_length:
         push ebx                ; since we're using EBX, push it to store whatever it had
         mov ebx, eax            ; prepare to do pointer arithmetic
 
-        .next_char:
+.next_char:
         cmp byte [eax], 0
         jz .finished
         inc eax
         jmp .next_char
 
-        .finished:
+.finished:
         sub eax, ebx            ; subtract both addresses, the number of bytes to write is in eax
         pop ebx                 ; leave ebx as it was
         ret
 
-        ;;
-        ;; arguments:
-        ;;
-        ;; string message (eax)
-        ;;
+;;
+;; arguments:
+;;
+;; string message (eax)
+;;
 string_print:
-        ;; we are going to be using all of those, so push them
+;; we are going to be using all of those, so push them
         push edx
         push ecx
         push ebx
@@ -42,6 +42,24 @@ string_print:
         pop ebx                 ; restore everything
         pop ecx
         pop edx
+        ret
+
+;;
+;; arguments:
+;;
+;; string message (eax)
+;;
+string_println:
+        call string_print
+
+        push eax                ; push eax onto the stack to preserve it
+        mov eax, 0Ah            ; mov the linefeed to eax
+        push eax                ; now push the linefeed (this relies on little endian arch?)
+
+        mov eax, esp            ; store in eax the address of esp after pushing the linefeed
+        call string_print
+        pop eax                 ; remove the linefeed from the stack
+        pop eax                 ; restore the original value of eax
         ret
 
 exit:
