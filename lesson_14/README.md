@@ -1,0 +1,3 @@
+# Exercise
+
+Multiply two numbers.
