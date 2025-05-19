@@ -1,0 +1,3 @@
+# Exercise
+
+Getting the time.

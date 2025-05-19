@@ -1,3 +1,3 @@
 # Exercise
 
-Fizzbuzz or whatever this game is called.
+Executing an external programme.
